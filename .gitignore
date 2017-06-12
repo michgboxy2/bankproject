@@ -1,0 +1,5 @@
+.vagrant/
+phpmyadmin/
+..auth.js/
+./node_modules
+./package.json

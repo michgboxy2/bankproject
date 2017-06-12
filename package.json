@@ -1,0 +1,24 @@
+{
+  "name": "cd..",
+  "version": "1.0.0",
+  "description": "a book application for a bookstore",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "michael",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "chai": "^3.5.0",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
+    "jsonwebtoken": "^7.4.1",
+    "mongoose": "^4.10.2",
+    "morgan": "^1.8.2",
+    "supertest": "^3.0.0"
+  }
+}
