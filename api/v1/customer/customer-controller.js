@@ -32,9 +32,22 @@ var  cusModel = require("./customer-model.js"),
 	 	},(err) => { return next(err);})
 	 }
 
-	 exports.FetchCustomer = (req, res, next) => {
+	 exports.FetchAllCustomers = (req, res, next) => {
 	 	cusModel.find((err, data) = > {
 	 		if(!data){ return next(new Error("can'tfind customer"));}
+	 		res.status(200).json(data);
+	 	})
+	 }
+
+	 exports.FetchOneCustomer = (req, res, next)=> {
+	 	if(!req.customer){return next(new Error("can't find customer"));}
+	 	res.status(200).json(req.customer);
+	 }
+
+	 exports.EditCustomer = (req, res, next) => {
+	 	var id = req.params.id;
+	 	cusModel.findByIdAndUpdate(id, req.body).then((data) => {
+	 		if(!data){return next(new Error("can't update customer"));}
 	 		res.status(200).json(data);
 	 	})
 	 }
