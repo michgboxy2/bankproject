@@ -6,9 +6,9 @@ var  mongoose 	= require("mongoose"),
 
 	 AdminSchema = new mongoose.Schema({
 	 	username : {type : String, required : true, unique: true},
-	 	password : {tpe: String, required: true},
+	 	password: {type: String, required: true},
 	 	date : {type: Date, default: Date.now}
-	 });
+	 })
 
 
 	 AdminSchema.pre('save', function(next){
@@ -18,16 +18,16 @@ var  mongoose 	= require("mongoose"),
 
 	 //method to authenticate user
 	 AdminSchema.methods = {
-	 	authenticate : (plaintext) => {
+	 	authenticate : function(plaintext){
 	 		return bcrypt.compareSync(plaintext, this.password);
 	 	},
 
-	 	encryptPassword : (plaintext){
+	 	encryptPassword : (plaintext) => {
 	 		if(!plaintext){ return next(new Error("please enter your password"));}
-	 		var salt = bcrypt.gensaltSync();
+	 		var salt = bcrypt.genSaltSync();
 	 		return bcrypt.hashSync(plaintext, salt);
 	 	}
 
 	 }
 
-	 module.exports = mongoose.model("admin", "adminSchema");
+	 module.exports = mongoose.model("admin", AdminSchema);
