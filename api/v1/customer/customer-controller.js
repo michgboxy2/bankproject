@@ -33,8 +33,8 @@ var  cusModel = require("./customer-model.js"),
 	 }
 
 	 exports.FetchAllCustomers = (req, res, next) => {
-	 	cusModel.find((err, data) = > {
-	 		if(!data){ return next(new Error("can'tfind customer"));}
+	 	cusModel.find((err, data) => {
+	 		if(err){ return next(new Error("can't fetch all customers"));}
 	 		res.status(200).json(data);
 	 	})
 	 }
