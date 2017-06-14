@@ -8,5 +8,5 @@ var express = require("express"),
 	api.use("/admin",adminRouter);
 	api.use("/auth", authRouter);
 
-	modules.exports = api;
+	module.exports = api;
 
