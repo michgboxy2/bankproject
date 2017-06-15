@@ -9,7 +9,7 @@ var mongoose	= require("mongoose"),
 		lastname : {type: String, required: true},
 		email : {type: String, required: true, unique : true},
 		account_type : {type: String, required : true},
-		account_number : {type: Number, default : Math.random(000000000, 999999999)},
+		account_number : {type: Number, default : Math.random() * (000000000,999999999)},
 		account_balance : {type : Number, required : true},
 		password : {type : String, required : true},
 		admin_id : [{type: mongoose.Schema.Types.ObjectId, ref: 'admin'}]
