@@ -1,4 +1,5 @@
 var  cusModel = require("./customer-model.js"),
+	 adminModel = require("../admin/admin-model.js"),
 	 auth	  = require("../auth/auth.js");
 
 
@@ -12,12 +13,13 @@ var  cusModel = require("./customer-model.js"),
 
 	 exports.RegisterCustomer = (req, res, next) => {
 	 	var customer = req.body,
+	 		//admin    = req.body,
 	 		customerObj = new cusModel(customer);
 
 	 		customerObj.save((err, data) => {
 	 			if(err){ return next( new Error("can't register customer"));}
 	 			data = data.toObject();
-	 			var token = auth.SignToken(data._id);
+	 			var token = auth.signToken(data._id);
 	 			data["_token"] = token;
 	 			res.status(200).json(data);
 	 		})
@@ -49,5 +51,5 @@ var  cusModel = require("./customer-model.js"),
 	 	cusModel.findByIdAndUpdate(id, req.body).then((data) => {
 	 		if(!data){return next(new Error("can't update customer"));}
 	 		res.status(200).json(data);
-	 	})
+	 	}, (err)=>{ return next(err);})
 	 }
