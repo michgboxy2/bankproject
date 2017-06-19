@@ -7,6 +7,6 @@ var auth	= 		require("./auth.js"),
 
 	router.route("/")
 	.post(auth.verifyUser, controller.signIn)
-	.post(cusauth.verifyUser, cusController.signIn);
+	.post(cusauth.verifyCustomer, cusController.signIn);
 	
 	module.exports = router;
