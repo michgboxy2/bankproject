@@ -4,3 +4,7 @@ phpmyadmin/
 ./api/v1/auth/cus-auth.js/
 .node_modules/
 .package.json/
+api/v1/auth/auth.js
+api/v1/auth/auth.js/
+api/v1/auth/cus-auth.js
+api/v1/auth/cus-auth.js/

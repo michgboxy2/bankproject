@@ -8,11 +8,11 @@ var mongoose	= require("mongoose"),
 		firstname :{type: String, required: true},
 		lastname : {type: String, required: true},
 		email : {type: String, required: true, unique : true},
-		account_type : {type: String, required : true},
+		account_type : {type: String, enum : ['saving', 'current', 'fixed-deposit',], required : true},
 		account_number : {type: Number, default : Math.floor(Math.random() * (9999999999))},
 		account_balance : {type : Number, required : true},
 		password : {type : String, required : true},
-		admin_id : [{type: mongoose.Schema.Types.ObjectId, ref: 'admin'}]
+		admin : [{type: mongoose.Schema.Types.ObjectId, ref: 'admin'}]
 	});
 
 	customerSchema.pre('save', function(next){
