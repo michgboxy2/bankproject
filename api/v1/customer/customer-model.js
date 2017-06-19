@@ -12,7 +12,8 @@ var mongoose	= require("mongoose"),
 		account_number : {type: Number, default : Math.floor(Math.random() * (9999999999))},
 		account_balance : {type : Number, required : true},
 		password : {type : String, required : true},
-		admin : [{type: mongoose.Schema.Types.ObjectId, ref: 'admin'}]
+		//admin : {type: String, required : true}
+		admin : [{type: mongoose.Schema.Types.ObjectId, ref: 'admin'}],
 	});
 
 	customerSchema.pre('save', function(next){
