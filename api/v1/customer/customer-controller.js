@@ -13,6 +13,16 @@ var  cusModel = require("./customer-model.js"),
 	 }
 
 	 exports.RegisterCustomer = (req, res, next) => {
+	 	console.log(req.user);
+
+	 	/*var michy = new admin({
+	 		
+	 		username : req.body.username,
+	 		password : req.body.password
+	 	})
+	 	michy.save((err) => {
+	 		if(err){ return next(new Error("can't save michy"));}
+	 	}) */
 
 	 	var customer = new cusModel({
 	 		firstname : req.body.firstname,
@@ -21,20 +31,24 @@ var  cusModel = require("./customer-model.js"),
 	 		account_type : req.body.account_type,
 	 		account_balance : req.body.account_balance,
 	 		password : req.body.password,
-	 		admin    : admin._id
+	 		admin    : req.user._id
+	 		
 	 	});
 
-	 		customer.save((err) => {
+	 		customer.save((err, data) => {
 	 			if(err){ return next(new Error(" can't save customer"));}
+	 			res.status(200).json(data);
+
 
 	 			})
-
-	 		cusModel.findOne({_id : "admin_id"})
+	 		var email = req.body.email;
+	 		cusModel.findOne({_id : req.user._id})
 	 		.populate('admin', 'username')
 	 		.exec(function(err, customer){
 	 		    if(err){ return next(new Error("can't execute customer"));}
-	 			res.status(200).json(customer);
-	 		}) 		
+	 		    res.status(200).json(customer);
+	 				 		
+	 				 		}) 		
 	 }
 
 	
@@ -48,21 +62,21 @@ var  cusModel = require("./customer-model.js"),
 	 	},(err) => { return next(err);})
 	 }
 
-	 exports.FetchAccountCustomers = (req, res, next) => {
+	 exports.FetchAllCustomers = (req, res, next) => {
 
-	 cusModel.find({'account_type' : 'current'}, 'firstname email', function(err, customers){
+	 cusModel.find({'account_type' : 'savings'}, 'firstname email', function(err, customers){
 	 	if(err){ return next(new Error("can't find customers"));}
 	 	res.status(200).json(customers);
 	 })
 
 	}
 
-	 exports.FetchAllCustomers = (req, res, next) => {
+	/* exports.FetchAllCustomers = (req, res, next) => {
 	 	cusModel.find((err, data) => {
 	 		if(err){ return next(new Error("can't fetch all customers"));}
 	 		res.status(200).json(data);
 	 	})
-	 } 
+	 }*/ 
 
 	 exports.FetchOneCustomer = (req, res, next)=> {
 	 	if(!req.customer){return next(new Error("can't find customer"));}
