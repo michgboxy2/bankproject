@@ -11,7 +11,7 @@ var express  = require("express"),
 
 	//mounting the controller that register customer and the one that fetches all customer to their respective rout.
 	router.route("/")
-	.post(controller.RegisterCustomer)
+	.post(auth.decodeToken, controller.RegisterCustomer)
 	.get(controller.FetchAllCustomers);
 
 
