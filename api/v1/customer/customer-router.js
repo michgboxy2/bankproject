@@ -12,7 +12,7 @@ var express  = require("express"),
 	//mounting the controller that register customer and the one that fetches all customer to their respective rout.
 	router.route("/")
 	.post(controller.RegisterCustomer)
-	.get(auth.verifyUser, control.signIn, controller.FetchAllCustomers);
+	.get(controller.FetchAllCustomers);
 
 
 	//mounting the delete, fetch and update controllers that requires an id;
