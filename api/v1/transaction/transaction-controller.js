@@ -4,9 +4,9 @@ var transactionModel = 	require("./transaction-model"),
 
 	exports.postTransaction = (req, res, next) => {
 		transaction = new transactionModel({
-			accountname : req.user.firstname,
+			accountname : req.user._id,
 			amount : req.body.amount,
-			recipient : req.body.account_number
+			recipient : req.body.recipient
 		}) 
 		
 		transaction.save((err, data) => {
@@ -14,11 +14,11 @@ var transactionModel = 	require("./transaction-model"),
 			res.status(200).json(data);
 		})
 
-		transactionModel.findOne(firstname : req.user.firstname)
+		transactionModel.findOne({_id : req.user._id})
 		.populate('accountname', 'firstname')
 		.exec(function(err, transaction){
 			if(err){ return next(new Error("can't find recipient"));}
-			res.status(200).json(transaction);
+			//res.status(200).json(transaction);
 
 		})
 
