@@ -37,6 +37,9 @@ var  cusModel = require("./customer-model.js"),
 
 	 		customer.save((err, data) => {
 	 			if(err){ return next(new Error(" can't save customer"));}
+	 			var data = data.toObject();
+	 			var token = auth.signToken(data._id);
+	 			data["_token"] = token;
 	 			res.status(200).json(data);
 
 	 			})
@@ -62,7 +65,7 @@ var  cusModel = require("./customer-model.js"),
 
 	 exports.FetchAllCustomers = (req, res, next) => {
 
-	 cusModel.find({'account_type' : 'savings'}, 'firstname email', function(err, customers){
+	 cusModel.find({'account_type' : 'saving'}, 'firstname email admin account_number', function(err, customers){
 	 	if(err){ return next(new Error("can't find customers"));}
 	 	res.status(200).json(customers);
 	 })
