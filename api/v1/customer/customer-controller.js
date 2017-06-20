@@ -39,9 +39,8 @@ var  cusModel = require("./customer-model.js"),
 	 			if(err){ return next(new Error(" can't save customer"));}
 	 			res.status(200).json(data);
 
-
 	 			})
-	 		var email = req.body.email;
+	 		
 	 		cusModel.findOne({_id : req.user._id})
 	 		.populate('admin', 'username')
 	 		.exec(function(err, customer){
@@ -52,7 +51,6 @@ var  cusModel = require("./customer-model.js"),
 	 }
 
 	
-
 	 exports.RemoveCustomer = (req, res, next) => {
 	 	var id = req.params.id;
 
