@@ -1,17 +1,25 @@
-var transaction = 	require("./transaction-model"),
+var transactionModel = 	require("./transaction-model"),
 	customer	= 	require("../customer/customer-model.js");
 	
 
 	exports.postTransaction = (req, res, next) => {
-		transaction = new transaction({
-			accountname : customer._id,
+		transaction = new transactionModel({
+			accountname : req.user.firstname,
 			amount : req.body.amount,
-			recipient : customer._id
+			recipient : req.body.account_number
 		}) 
 		
 		transaction.save((err, data) => {
 			if(err){ return next(new Error("can't save transaction"));}
 			res.status(200).json(data);
+		})
+
+		transactionModel.findOne(firstname : req.user.firstname)
+		.populate('accountname', 'firstname')
+		.exec(function(err, transaction){
+			if(err){ return next(new Error("can't find recipient"));}
+			res.status(200).json(transaction);
+
 		})
 
 	}
