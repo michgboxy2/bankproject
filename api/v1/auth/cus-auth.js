@@ -1,7 +1,7 @@
 var expressjwt =	require("express-jwt"),
 	jwt 	   =    require("jsonwebtoken"),
 	cusModel   =	require("../customer/customer-model.js"),
-	checkToken =    expressjwt({secret : "jsonwed"});
+	checkToken =    expressjwt({secret : "jsonweb"});
 
 
 
@@ -18,15 +18,13 @@ var expressjwt =	require("express-jwt"),
 
 			if(!email || !password){ return next(new Error("please enter email/password"));}
 
-			customer.find({}).populate('admin').exec(callback);
-
 
 			cusModel.findOne({email : email}).then(function(customer){
 				if(!customer){ return next(new Error("invalid email or password"));}
 
 				if(!customer.authenticate(password)){ return next(new Error("incorrect username/password"));}
 
-				res.body = customer;
+				req.customer = customer;
 				next();
 			}, (err) => { return next(err);})
 
