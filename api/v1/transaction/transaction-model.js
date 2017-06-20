@@ -7,7 +7,7 @@ var mongoose = 	require("mongoose"),
 	transactionSchema = new mongoose.Schema({
 		accountname : {type: mongoose.Schema.Types.ObjectId, ref: 'customer'},
 		amount		: {type: Number, required : true},
-		recipient	: {type: mongoose.Schema.Type.ObjectId, ref : 'customer'},
+		recipient	: {type: Number, required: true},
 		date 		: {type : Date, default : Date.now}
 	});
 
