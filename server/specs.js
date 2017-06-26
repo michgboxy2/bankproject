@@ -103,7 +103,7 @@ var request = require('supertest'),
 				.expect(200)
 				.end(function(err, res){
 					//console.log(res.body);
-					expect(res.body.username).to.be.equal("Tinboooooogie");
+					expect(res.body).to.be.an("object");
 					next();
 					})
 				})
