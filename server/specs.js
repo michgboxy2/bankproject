@@ -7,7 +7,7 @@ var request = require('supertest'),
 
 	//integration test for the admin endpoints
 	describe("Admin Endpoints", function(){
-		it("should add an admin", function(next) {
+		it.skip("should add an admin", function(next) {
 
 				var data = {
 					'username' : "Michaellllii",
@@ -28,7 +28,7 @@ var request = require('supertest'),
 						})
 
 			})
-		it("should fetch all admins", function(next){
+		it.skip("should fetch all admins", function(next){
 
 			request(app)
 			.get("/api/v1/admin")
@@ -42,12 +42,15 @@ var request = require('supertest'),
 			})
 		})
 		it("should fetch one admin by Id", function(next){
+			var id = "5940b1081264a709b59812d5";
 			request(app)
-			.get("/api/v1/admin"+id)
+			.get("/api/v1/admin/"+id)
 			.expect(200)
 			.set("Content-Type", "Application/json")
 			.end(function(err, res){
 				res.body.should.be.json;
+				console.log(res.body);
+				next();
 			})
 		})
 	})
