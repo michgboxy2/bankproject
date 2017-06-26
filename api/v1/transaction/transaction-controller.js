@@ -26,7 +26,7 @@ var transactionModel = 	require("./transaction-model"),
 
 	//controller to fetch all transactions from the database
 	exports.FetchTransaction = (req, res, next) => {
-		transaction.find((err, data)=> {
+		transactionModel.find((err, data)=> {
 			if(err){ return next(new Error("can't fetch transaction"));}
 			res.status(200).json(data);
 		})
@@ -35,7 +35,7 @@ var transactionModel = 	require("./transaction-model"),
 	//controller to fetch one transaction from the database
 	exports.FetchOneTransaction = (req, res, next) => {
 		var id = req.params.id;
-		transaction.findById(id).then((data)=> {
+		transactionModel.findById(id).then((data)=> {
 			if(!data){ return next(new Error("can't fetch transaction"));}
 			res.status(200).json(data);
 		}, (err) => { return next(err);})
