@@ -80,4 +80,32 @@ var request = require('supertest'),
 							})
 						})
 					})
+		it("should update staff", function(next){
+			var data = {
+				"username" : "Michalelnhbdfj",
+				"password" : "King"
+			}
+			request(app)
+			.post("/api/v1/admin")
+			.send(data)
+			.set("Content-Type", "Application/json")
+			.end(function(err,res){
+		
+				var id = res.body._id
+				var details = {
+					"username" : "Tinbooooogie",
+					"password" : "biggi"
+				}
+				request(app)			
+				.put("/api/v1/admin/"+id)
+				.send(details)
+				.set("Content-Type", "Application/json")
+				.expect(200)
+				.end(function(err, res){
+					console.log(res.body);
+					expect(res.body.name).to.be.equal("Tinbooooogie");
+					next();
+					})
 				})
+			})
+		})
