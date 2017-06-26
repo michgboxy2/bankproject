@@ -41,7 +41,7 @@ var request = require('supertest'),
 				next();
 			})
 		})
-		it("should fetch one admin by Id", function(next){
+		it.skip("should fetch one admin by Id", function(next){
 			var id = "5940b1081264a709b59812d5";
 			request(app)
 			.get("/api/v1/admin/"+id)
@@ -51,6 +51,29 @@ var request = require('supertest'),
 				res.body.should.be.json;
 				console.log(res.body);
 				next();
+			})
+		})
+		it("should delete an admin from the database", function(next){
+			var data = {
+				'username' : 'oo',
+				'password' : 'oo'
+			}
+
+			request(app)
+			.post("/api/v1/admin")
+			.send(data)
+			.expect(200)
+			.set("Content-Type", "Application/json")
+			.end(function(err, res){
+				request(app)
+				.delete("/api/v1/admin/"+data._id)
+				.get("/api/v1/admin/"+data._id)
+				.expect(200)
+				.set("Content-Type", "Application/json")
+				.end(function(err, res){
+					res.body.username.should.be.empty;
+				})
+
 			})
 		})
 	})
