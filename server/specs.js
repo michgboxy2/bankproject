@@ -82,7 +82,7 @@ var request = require('supertest'),
 					})
 		it("should update staff", function(next){
 			var data = {
-				"username" : "Michalelnhbdfj",
+				"username" : "Michaloelnhbdfj",
 				"password" : "King"
 			}
 			request(app)
@@ -92,18 +92,18 @@ var request = require('supertest'),
 			.end(function(err,res){
 		
 				var id = res.body._id
-				var details = {
-					"username" : "Tinbooooogie",
+				var data = {
+					"username" : "Tinboooooogie",
 					"password" : "biggi"
 				}
 				request(app)			
 				.put("/api/v1/admin/"+id)
-				.send(details)
+				.send(data)
 				.set("Content-Type", "Application/json")
 				.expect(200)
 				.end(function(err, res){
-					console.log(res.body);
-					expect(res.body.name).to.be.equal("Tinbooooogie");
+					//console.log(res.body);
+					expect(res.body.username).to.be.equal("Tinboooooogie");
 					next();
 					})
 				})
