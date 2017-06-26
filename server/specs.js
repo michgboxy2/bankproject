@@ -49,31 +49,35 @@ var request = require('supertest'),
 			.set("Content-Type", "Application/json")
 			.end(function(err, res){
 				res.body.should.be.json;
-				console.log(res.body);
+				//console.log(res.body);
 				next();
 			})
 		})
-		it("should delete an admin from the database", function(next){
+		it.skip("should delete an admin from the database", function(next){
 			var data = {
-				'username' : 'oo',
-				'password' : 'oo'
+				'username' : "gkjjfkakahhh",
+				'password' : "okwa"
 			}
 
-			request(app)
-			.post("/api/v1/admin")
-			.send(data)
-			.expect(200)
-			.set("Content-Type", "Application/json")
-			.end(function(err, res){
-				request(app)
-				.delete("/api/v1/admin/"+data._id)
-				.get("/api/v1/admin/"+data._id)
-				.expect(200)
-				.set("Content-Type", "Application/json")
-				.end(function(err, res){
-					res.body.username.should.be.empty;
-				})
+					request(app)
+						.post("/api/v1/admin")
+						.send(data)
+						.set("Content-Type", "Application/json")
+						.expect(200)
+						.end(function(err, res){
+							var id = res.body._id
+							//console.log(res.body);
 
-			})
-		})
-	})
+							request(app)
+							.delete("/api/v1/admin"+id)
+							.set("Content-Type", "Application/json")
+							.expect(200)
+							.end(function(err, res){																
+							expect(res.body).to.be.empty;
+
+							next();
+
+							})
+						})
+					})
+				})
