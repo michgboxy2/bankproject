@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin Signup</title>
-	<link rel="stylesheet" type="text/css" href="style/styles.css">
+<meta charset="utf-8">
+	<title></title>
 </head>
+<style type="text/css">
 
+	.hide{
+		display: none;
+	}
+
+
+
+</style>
 <body>
+	
 
-	<form id="add-contact" class="module-active">
-		<label for="username" class="header">Admin Register</label>
-		<input type="text" class="contact-name" placeholder="Username">
-		<input type="text" class="phone-number" placeholder="Password">
-		<input type="submit" id="submit" value="Sign UP">
+	<form id="register">
+		<h1>Admin Register</h1>
+		<hr/>
+
+		<input type="text" placeholder="username" name="username"></br>
+		<input type="password" placeholder="password" name="password">
+
+		<input type="submit" name="submit">
+
 	</form>
-	<div id="contacts">
-		<div class="add-contact">Add Contact</div>
-		<ul id="contact-list">
-		</ul>
-	</div>
 
-<script data-main="js/app.js" src="js/class.contact.js">
+	<form id="Login" class="hide">
+		<h1>Admin Login</h1>
+		<hr/>
+		
+		<input type="text" placeholder="username" name="username"></br>
+		<input type="password" placeholder="password" name="password">
+
+		<input type="submit" name="submit">
+
+	</form>
 
 
-
-
-
+	<script type="text/javascript" src="js/app.js"></script>
 
 	
-	
-	
-</script>
 </body>
 </html>
