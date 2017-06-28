@@ -13,7 +13,7 @@ var  cusModel = require("./customer-model.js"),
 	 }
 
 	 exports.RegisterCustomer = (req, res, next) => {
-	 	console.log(req.user);
+	 	//console.log(req.user);
 
 	 	/*var michy = new admin({
 	 		
@@ -35,6 +35,14 @@ var  cusModel = require("./customer-model.js"),
 	 		
 	 	});
 
+	 		cusModel.findOne({_id : req.user._id})
+	 		.populate('admin', 'username')
+	 		.exec(function(err, customer){
+	 		    if(err){ return next(new Error("can't execute customer"));}
+	 		    //res.status(200).json(customer);
+	 				 		
+	 				 		}) 		
+
 	 		customer.save((err, data) => {
 	 			if(err){ return next(new Error(" can't save customer"));}
 	 			var data = data.toObject();
@@ -48,7 +56,7 @@ var  cusModel = require("./customer-model.js"),
 	 		.populate('admin', 'username')
 	 		.exec(function(err, customer){
 	 		    if(err){ return next(new Error("can't execute customer"));}
-	 		    res.status(200).json(customer);
+	 		    //res.status(200).json(customer);
 	 				 		
 	 				 		}) 		
 	 }
