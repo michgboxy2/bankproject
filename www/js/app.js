@@ -19,6 +19,7 @@
 
 			var data = "",
 				elements = this.elements;
+				//console.log(elements);
 				
 				//make arraylike data inherit array property
 			Array.prototype.forEach.call(elements, function(v, i, a){
@@ -35,7 +36,7 @@
 
 			xhr.onreadystatechange = function(){
 				handleresponse(xhr);
-			};
+			}
 				//set Request header
 			xhr.setRequestHeader("Content-Type", "Application/x-www-form-urlencoded");
 

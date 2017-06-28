@@ -34,7 +34,7 @@
 		<h1 id="register-label">Add customer</h1>
 		<a href=""><div id="viewpage">view customers</div></a>
 		<hr>
-		<form id="register" class="add"  action ="dashboard.html" method ="POST">
+		<form id="register" class="add">
 			<div>
 				<label>first name:</label>
 				<input type="text" name="firstname" placeholder="first name">
@@ -53,7 +53,7 @@
 				<select name="account_type">
 				<option value="current">current</option>
 				<option value="saving">saving</option>
-				<option value="fixed-deposit">fixed deposit</option>
+				<option value="fixed-deposit">fixed-deposit</option>
 				</select>
 			</div>
 			<div>
@@ -65,7 +65,7 @@
 				<input type="password" name="password" placeholder="password">
 			</div>
  
-			<input type="submit" name="register" value="add-customer">
+			<input type="submit" name="register">
 		</form>
 
 		<h4 class="jumpto">Have an account? <a href="login.php">login</a></h4>
@@ -97,6 +97,9 @@
 
 			</form>
 
+			<script type="text/javascript" src="js/dashboard.js"></script>
+
+
 		
 
 	<section class="foot">
@@ -105,4 +108,4 @@
 		</div>
 	</section>
 </body>
-</html>
+	</html>
