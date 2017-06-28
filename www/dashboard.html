@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TEST</title>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+
+<body>
+	<section>
+		<div class="mast">
+			<h1>Tina<span>Michy</span></h1>
+			<nav>
+				<ul class="clearfix">
+					<li><a href="dashboard.html" class="selected">add customer</a></li>
+					<li><a href="viewcustomer.html">view customer</a></li>
+					<li><a href="index.html">logout</a></li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+	<div class="wrapper">
+		<div id="stream">
+			<br>
+
+<div class="wrapper">
+		<h1 id="register-label">Add customer</h1>
+		<hr>
+		<form id="register"  action ="dashboard.php" method ="POST">
+			<div>
+				<label>first name:</label>
+				<input type="text" name="firstname" placeholder="first name">
+			</div>
+			<div>
+				<label>last name:</label>	
+				<input type="text" name="lastname" placeholder="last name">
+			</div>
+
+			<div>
+				<label>email:</label>
+				<input type="text" name="email" placeholder="email">
+			</div>
+			<div>
+				<label>Account Type:</label>
+				<select name="account_type">
+				<option value="current">current</option>
+				<option value="saving">saving</option>
+				<option value="fixed-deposit">fixed deposit</option>
+				</select>
+			</div>
+			<div>
+				<label>OPENING BALANCE:</label>
+				<input type="text" name="account_balance" placeholder="OPENING BALANCE">
+			</div>
+			<div>
+				<label>password:</label>
+				<input type="password" name="password" placeholder="password">
+			</div>
+ 
+			<input type="submit" name="register" value="add customer">
+		</form>
+
+		<h4 class="jumpto">Have an account? <a href="login.php">login</a></h4>
+	</div>
+
+
+
+		</div>
+
+		<div class="paginated">
+			<a href="#">1</a>
+			<a href="#">2</a>
+			<span>3</span>
+			<a href="#">2</a>
+		</div>
+	</div>
+
+	<section class="foot">
+		<div>
+			<p>&copy; 2016;
+		</div>
+	</section>
+</body>
+</html>
