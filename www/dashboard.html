@@ -4,6 +4,14 @@
 	<title>TEST</title>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
+<style type="text/css">
+.hide{
+	display: none;
+}
+
+
+
+</style>
 
 <body>
 	<section>
@@ -24,8 +32,9 @@
 
 <div class="wrapper">
 		<h1 id="register-label">Add customer</h1>
+		<a href=""><div id="viewpage">view customers</div></a>
 		<hr>
-		<form id="register"  action ="dashboard.php" method ="POST">
+		<form id="register" class="add"  action ="dashboard.html" method ="POST">
 			<div>
 				<label>first name:</label>
 				<input type="text" name="firstname" placeholder="first name">
@@ -56,7 +65,7 @@
 				<input type="password" name="password" placeholder="password">
 			</div>
  
-			<input type="submit" name="register" value="add customer">
+			<input type="submit" name="register" value="add-customer">
 		</form>
 
 		<h4 class="jumpto">Have an account? <a href="login.php">login</a></h4>
@@ -66,13 +75,29 @@
 
 		</div>
 
-		<div class="paginated">
-			<a href="#">1</a>
-			<a href="#">2</a>
-			<span>3</span>
-			<a href="#">2</a>
-		</div>
-	</div>
+			<form id="view" class="hide">
+
+				<label>Email</label>
+				<input type="text" name="email" placeholder="email">
+				
+				<div id="viewdiv">
+
+					<ul id="list">
+
+
+
+
+					</ul>
+
+
+
+
+				</div>
+
+
+			</form>
+
+		
 
 	<section class="foot">
 		<div>
