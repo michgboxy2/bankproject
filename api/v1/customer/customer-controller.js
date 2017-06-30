@@ -51,14 +51,7 @@ var  cusModel = require("./customer-model.js"),
 	 			res.status(200).json(data);
 
 	 			})
-	 		
-	 		cusModel.findOne({_id : req.user._id})
-	 		.populate('admin', 'username')
-	 		.exec(function(err, customer){
-	 		    if(err){ return next(new Error("can't execute customer"));}
-	 		    //res.status(200).json(customer);
-	 				 		
-	 				 		}) 		
+	 				
 	 }
 
 	
@@ -71,31 +64,51 @@ var  cusModel = require("./customer-model.js"),
 	 	},(err) => { return next(err);})
 	 }
 
-	 exports.FetchAllCustomers = (req, res, next) => {
+	/* exports.FetchAllCustomers = (req, res, next) => {
 
 	 cusModel.find({'account_type' : 'saving'}, 'firstname email admin account_number', function(err, customers){
 	 	if(err){ return next(new Error("can't find customers"));}
 	 	res.status(200).json(customers);
 	 })
 
-	}
+	} */
 
-	/* exports.FetchAllCustomers = (req, res, next) => {
+	 exports.FetchOneCustomer = (req, res, next) => {
+	 	//console.log(req.params.email);
+	 	var email = req.params.email;
+	 	cusModel.find({email : email}).then(function(data){
+	 		if(!data){ return next(new Error("can't find customer"));}
+	 		res.status(200).json(data);
+
+	 	}, (err) => {return next(err);})
+	 }
+
+	
+
+	 exports.FetchAllCustomers = (req, res, next) => {
 	 	cusModel.find((err, data) => {
 	 		if(err){ return next(new Error("can't fetch all customers"));}
 	 		res.status(200).json(data);
 	 	})
-	 }*/ 
+	 } 
 
-	 exports.FetchOneCustomer = (req, res, next)=> {
+	/* exports.FetchOneCustomer = (req, res, next)=> {
 	 	if(!req.customer){return next(new Error("can't find customer"));}
 	 	res.status(200).json(req.customer);
-	 }
+	 } */
 
 	 exports.EditCustomer = (req, res, next) => {
 	 	var id = req.params.id;
 	 	cusModel.findByIdAndUpdate(id, req.body).then((data) => {
 	 		if(!data){return next(new Error("can't update customer"));}
+	 		res.status(200).json(data);
+	 	}, (err)=>{ return next(err);})
+	 }
+
+	 exports.fetchByEmail = (req, res, next) => {
+	 	var email = req.params.email;
+	 	cusModel.findByEmail(email).then((data) => {
+	 		if(!data){ return next(new Error("can't find customer"));}
 	 		res.status(200).json(data);
 	 	}, (err)=>{ return next(err);})
 	 }
