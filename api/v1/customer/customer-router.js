@@ -14,11 +14,16 @@ var express  = require("express"),
 	.post(auth.decodeToken, controller.RegisterCustomer)
 	.get(auth.decodeToken, controller.FetchAllCustomers);
 
+	router.route("/:email")
+	.get(auth.decodeToken, controller.FetchOneCustomer);
+
+
+
 
 	//mounting the delete, fetch and update controllers that requires an id;
 	router.route("/:id")
 	.delete(auth.decodeToken, controller.RemoveCustomer)
-	.get(auth.decodeToken, controller.FetchOneCustomer)
-	.put(auth.decodeToken, controller.EditCustomer);
+	//.get(auth.decodeToken, controller.FetchOneCustomer)
+	.put(auth.decodeToken, controller.EditCustomer); 
 
 	module.exports = router;
