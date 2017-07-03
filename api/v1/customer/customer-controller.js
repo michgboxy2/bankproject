@@ -79,6 +79,7 @@ var  cusModel = require("./customer-model.js"),
 	 	cusModel.find({email : email}).then(function(data){
 	 		if(!data){ return next(new Error("can't find customer"));}
 	 		res.status(200).json(data);
+	 		console.log(data);
 
 	 	}, (err) => {return next(err);})
 	 }
