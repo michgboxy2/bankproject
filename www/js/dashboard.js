@@ -17,8 +17,8 @@
 		 viewpage.addEventListener('click', function(e){
 		 	e.preventDefault();
 
+		 	regform.classList.toggle("hide");
 		 	view.classList.toggle("hide");
-		 	viewpage.classList.toggle("hide");
 
 
 
@@ -70,7 +70,7 @@
 
 		 				var view = getElement("view");
 		 				if(user.hasOwnProperty("_token")){
-		 					console.log(user);
+		 					//console.log(user);
 		 					
 		 					regform.classList.toggle("add");
 		 					view.classList.toggle("hide");
