@@ -82,7 +82,6 @@
 
 
 		 	view.addEventListener('submit', function(e){
-		 		e.preventDefault();
 
 		 		var data = "",
 		 		email = getElement("email");
@@ -92,34 +91,43 @@
 		 		var url = "http://192.168.33.20:3000/api/v1/customer/"+ String(email.value);
 		 		console.log(url);
 		 		xhr.open("GET", url);
-		 		xhr.onreadystatechage = function(){
+		 		xhr.onreadystatechange = function(){
 		 			handleview(xhr);
 		 		}
 
 		 		//xhr.setRequestHeader("Content-Type", "Application/json");
 		 		xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
 
-		 		xhr.send(null);
+		 		xhr.send();
+
+		 		e.preventDefault();
 
 		 	}, false);
 
 
 		 		function handleview(http){
-		 			if(http.readyState == 4){
-		 				if(http.status == 200 || http.status == 304){
+		 			if(http.readyState === 4){
+		 				if(http.status === 200 || http.status === 304){
+		 					console.log(http.responseText);
 		 					var user = JSON.parse(http.responseText);
+		 					console.log(user)
+
 		 						user.forEach(function(user){
 		 							var list = document.getElementById('list'),
 		 								li = document.createElement("li"),
+		 								h2 = document.createElement("h2"),
+		 								h1 = document.createElement('h3'),
 		 								H = document.createElement("h3");
-		 								H.innerText = user.firstname;
+		 								h1.innerText = user.firstname;
 		 								H.innerText = user.lastname;
-		 								H.innerText = user.email;
+		 								h2.innerText = user.email;
 		 								H.innerText = user.account_number;
 		 								H.innerText = user.account_type;
 		 								H.innerText = user.account_balance;
 		 							var	br = document.createElement("br");
 		 								li.appendChild(H);
+		 								li.appendChild(h2);
+		 								li.appendChild(h1);
 		 								li.appendChild(br);
 		 								list.appendChild(li);
 		 					})
