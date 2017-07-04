@@ -7,12 +7,52 @@ var transactionModel = 	require("./transaction-model"),
 			accountname : req.user._id,
 			amount : req.body.amount,
 			recipient : req.body.recipient
-		}) 
-		
-		transaction.save((err, data) => {
-			if(err){ return next(new Error("can't save transaction"));}
-			res.status(200).json(data);
 		})
+
+
+		console.log(req.body.amount);
+
+		customer.findById(req.user._id).then((data) => {
+			if(!data){return next(new Error("can't find customer"));}
+			data = data.toObject();
+
+			var balance = data.account_balance,
+				amount  = req.body.amount;
+			
+			console.log(balance);
+			console.log(amount);
+			if(balance > amount){
+			var total = (balance - amount);
+			} else {
+				return next(new Error("INSUFFICIENT BALANCE"));
+			}
+			
+			
+
+
+
+			
+		}, (err) => { return next(err);})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		transactionModel.findOne({_id : req.user._id})
 		.populate('accountname', 'firstname')
@@ -21,6 +61,17 @@ var transactionModel = 	require("./transaction-model"),
 			//res.status(200).json(transaction);
 
 		})
+
+
+
+
+		
+		transaction.save((err, data) => {
+			if(err){ return next(new Error("can't save transaction"));}
+			res.status(200).json(data);
+		})
+
+		
 
 	}
 
