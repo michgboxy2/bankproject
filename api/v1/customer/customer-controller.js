@@ -106,10 +106,10 @@ var  cusModel = require("./customer-model.js"),
 	 	}, (err)=>{ return next(err);})
 	 }
 
-	 exports.fetchByEmail = (req, res, next) => {
+	/* exports.fetchByEmail = (req, res, next) => {
 	 	var email = req.params.email;
 	 	cusModel.findByEmail(email).then((data) => {
 	 		if(!data){ return next(new Error("can't find customer"));}
 	 		res.status(200).json(data);
 	 	}, (err)=>{ return next(err);})
-	 }
+	 } */

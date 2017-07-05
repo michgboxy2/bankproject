@@ -114,18 +114,23 @@
 
 		 						user.forEach(function(user){
 		 							var list = document.getElementById('list'),
-		 								li = document.createElement("li"),
+		 								li = document.createElement("li"),	
 		 								h2 = document.createElement("h2"),
 		 								h1 = document.createElement('h3'),
+		 								p = document.createElement("p"),
+		 								a = document.createElement("a"),
 		 								H = document.createElement("h3");
-		 								h1.innerText = user.firstname;
-		 								H.innerText = user.lastname;
+	
+		 								p.innerText = user.account_type;
+		 								a.innerText = user.admin;
+		 								h1.innerText = user.firstname;		 								
 		 								h2.innerText = user.email;
 		 								H.innerText = user.account_number;
-		 								H.innerText = user.account_type;
 		 								H.innerText = user.account_balance;
 		 							var	br = document.createElement("br");
 		 								li.appendChild(H);
+		 								li.appendChild(p);
+		 								li.appendChild(a);
 		 								li.appendChild(h2);
 		 								li.appendChild(h1);
 		 								li.appendChild(br);
