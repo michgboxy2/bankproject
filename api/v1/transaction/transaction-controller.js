@@ -17,6 +17,14 @@ var transactionModel = 	require("./transaction-model"),
 
 		})
 
+var account_number = req.params.account_number;
+		customer.find({account_number : req.body.recipient}).then(function(details){
+			var shoo = details.account_balance;
+			if(!details){ return next(new Error("can't find customer"));}
+										
+
+				
+
 
 
 
@@ -25,31 +33,59 @@ var transactionModel = 	require("./transaction-model"),
 			if(!data){return next(new Error("can't find customer"));}
 			
 				data = data.toObject();
+				//console.log(details.length);
+				for(i = 0; i < details.length; i++){
+					var acc = details[0];
+				//	console.log(acc["account_balance"]);
+				}
+
+				
 
 			var balance = data.account_balance,
+				recBalance = acc.account_balance,
+
 				amount  = req.body.amount,
-				
+
+				newBal =  (recBalance + amount),
+
 				total   = (balance - amount);
+				console.log(recBalance);
+
+				//console.log(recBalance);
+
+				acc["account_balance"] = newBal;
+				var recipientId = acc["_id"];
 
 				data["account_balance"] = total;
+				console.log(acc);
+
+
 
 
 				customer.findByIdAndUpdate(req.user._id, data).then((customers) => {
 					if(!customers){ return next(new Error("can't update"));}
 
-					console.log(customers);				
-					
+					customer.findByIdAndUpdate(recipientId, acc).then((recipient) => {
+					if(!recipient){ return next(new Error("can't update recipient"));}
+
+
+					//console.log(customers);						
 				}, (err) => { return next(err);})
 
-				
-				
 
-			
-
-						
+					//console.log(customers);						
+				}, (err) => { return next(err);})
+				
 	
 		}, (err) => { return next(err);})
-		
+
+	}, (err) => { return next(err);})
+
+
+
+				
+
+
 
 
 
