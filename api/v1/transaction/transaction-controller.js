@@ -44,17 +44,23 @@ var account_number = req.params.account_number;
 			var balance = data.account_balance,
 				recBalance = acc.account_balance,
 
-				amount  = parseInt(req.body.amount),
-				
+				amount  = req.body.amount,
+
 				newBal =  (recBalance + amount),
 
 				total   = (balance - amount);
+				console.log(recBalance);
+
+				//console.log(recBalance);
 
 				acc["account_balance"] = newBal;
 				var recipientId = acc["_id"];
 
 				data["account_balance"] = total;
 				console.log(acc);
+
+
+
 
 				customer.findByIdAndUpdate(req.user._id, data).then((customers) => {
 					if(!customers){ return next(new Error("can't update"));}
