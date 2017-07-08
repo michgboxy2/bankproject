@@ -110,9 +110,8 @@
 		 				if(http.status === 200 || http.status === 304){
 		 					console.log(http.responseText);
 		 					var user = JSON.parse(http.responseText);
-		 					console.log(user)
 
-		 						user.forEach(function(user){
+		 						forEach(function(user){
 		 							var list = document.getElementById('list'),
 		 								li = document.createElement("li"),	
 		 								h2 = document.createElement("h2"),
