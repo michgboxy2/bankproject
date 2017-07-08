@@ -66,11 +66,11 @@
 		 		if(http.readyState == 4){
 		 			if(http.status == 200 || http.status == 304){
 		 				var user = JSON.parse(http.responseText);
-		 				console.log(user);
+		 				var regform = document.getElementById('register');
 
 		 				var view = getElement("view");
 		 				if(user.hasOwnProperty("_token")){
-		 					//console.log(user);
+		 					regform.reset();
 		 					
 		 					regform.classList.toggle("add");
 		 					view.classList.toggle("hide");
@@ -111,7 +111,7 @@
 		 					console.log(http.responseText);
 		 					var user = JSON.parse(http.responseText);
 
-		 						forEach(function(user){
+		 						user.forEach(function(user){
 		 							var list = document.getElementById('list'),
 		 								li = document.createElement("li"),	
 		 								h2 = document.createElement("h2"),
