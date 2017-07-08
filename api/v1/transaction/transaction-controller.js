@@ -1,131 +1,76 @@
 var transactionModel = 	require("./transaction-model"),
 	customer	= 	require("../customer/customer-model.js");
 	
-
-	exports.postTransaction = (req, res, next) => {
+	 exports.postTransaction = (req, res, next) => {
 		transaction = new transactionModel({
 			accountname : req.user._id,
 			amount : req.body.amount,
 			recipient : req.body.recipient
 		})
 
+
 		transactionModel.findOne({_id : req.user._id})
 		.populate('accountname', 'firstname')
 		.exec(function(err, transaction){
 			if(err){ return next(new Error("can't find recipient"));}
 			//res.status(200).json(transaction);
-
 		})
 
-var account_number = req.params.account_number;
+		customer.findById(req.user._id).then((transferer)=> {
+			if(!transferer){ return next(new Error("can't find customer"));}
+			//console.log(transferer);
+		
+		var account_number = req.params.account_number;
 		customer.find({account_number : req.body.recipient}).then(function(details){
-			var shoo = details.account_balance;
-			if(!details){ return next(new Error("can't find customer"));}
-										
-
-				
-
-
-
-
-
-		customer.findById(req.user._id).then((data) => {
-			if(!data){return next(new Error("can't find customer"));}
+			if(!details){ return next(new Error("can't find recipient"));}
 			
-				data = data.toObject();
-				//console.log(details.length);
-				for(i = 0; i < details.length; i++){
-					var acc = details[0];
-				//	console.log(acc["account_balance"]);
-				}
+			for(i =0; i < details.length; i++){
+				var recipient = details[0];				
+			}
+			
+			var RecBal = Number(recipient.account_balance);
+			var TransfererBal = Number(transferer.account_balance); 
+			var amount = Number(req.body.amount);
 
-				
+			if(amount > TransfererBal){ return next(new Error("INSUFFICIENT BALANCE"));
 
-			var balance = data.account_balance,
-				recBalance = acc.account_balance,
+		} else {
 
-				amount  = req.body.amount,
+			recipient["account_balance"] = (RecBal + amount);
+			transferer["account_balance"] = (TransfererBal - amount);
 
-				newBal =  (recBalance + amount),
+		customer.findByIdAndUpdate(req.user._id, transferer).then((customer) => {
+			if(!customer){ return next(new Error("can't update customer"));}
+		}) 
 
-				total   = (balance - amount);
-				console.log(recBalance);
+		customer.findByIdAndUpdate(recipient._id, recipient).then((receiver) => {
+			if(!receiver){ return next(new Error("can't update receiver"));}
+		})
 
-				//console.log(recBalance);
-
-				acc["account_balance"] = newBal;
-				var recipientId = acc["_id"];
-
-				data["account_balance"] = total;
-				console.log(acc);
-
-
-
-
-				customer.findByIdAndUpdate(req.user._id, data).then((customers) => {
-					if(!customers){ return next(new Error("can't update"));}
-
-					customer.findByIdAndUpdate(recipientId, acc).then((recipient) => {
-					if(!recipient){ return next(new Error("can't update recipient"));}
-
-
-					//console.log(customers);						
-				}, (err) => { return next(err);})
-
-
-					//console.log(customers);						
-				}, (err) => { return next(err);})
-				
-	
-		}, (err) => { return next(err);})
-
-	}, (err) => { return next(err);})
-
-
-
-				
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		}			
 		
+		})
 
+		}, (err) => { return next (err);})
 
-
-		
 		transaction.save((err, data) => {
 			if(err){ return next(new Error("can't save transaction"));}
 			res.status(200).json(data);
 		})
 
-		
+
+
 
 	}
+				
 
 	//controller to fetch all transactions from the database
 	exports.FetchTransaction = (req, res, next) => {
 		transactionModel.find((err, data)=> {
 			if(err){ return next(new Error("can't fetch transaction"));}
 			res.status(200).json(data);
+
+
 		})
 	}
 
@@ -135,5 +80,5 @@ var account_number = req.params.account_number;
 		transactionModel.findById(id).then((data)=> {
 			if(!data){ return next(new Error("can't fetch transaction"));}
 			res.status(200).json(data);
-		}, (err) => { return next(err);})
+		})
 	}
